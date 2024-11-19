@@ -1,0 +1,140 @@
+/* lógico arquivo: */
+
+CREATE TABLE Usuario (
+    e_mail string(500),
+    pk_ID_Usuario number(1000000000) PRIMARY KEY,
+    Nome_Usuario string(100)
+);
+
+CREATE TABLE Conteudo (
+    pk_ID_Conteudo number(1000000000) PRIMARY KEY,
+    Nome_Musica string(150)
+);
+
+CREATE TABLE Criador (
+    pk_ID_Criador_Musica number(10000000) PRIMARY KEY,
+    Nome_Criador string(100)
+);
+
+CREATE TABLE Banda (
+    Artistas array(50),
+    Descricao string(5000),
+    fk_criador_ID_criador_musica number(10000000) PRIMARY KEY
+);
+
+CREATE TABLE Artista (
+    Criacoes array(50),
+    Auto_Biografia string(5000),
+    fk_Criador_ID_Criador_Musica number(10000000) PRIMARY KEY
+);
+
+CREATE TABLE Playlist (
+    Quantidade_De_Musicas number(1000),
+    Duracao_Playlist number(144000),
+    fk_ID_Conteudo number(1000000000),
+    pk_ID_Playlist number(10000000000) PRIMARY KEY
+);
+
+CREATE TABLE Musica (
+    Duracao number(7200),
+    Veses_Tocada number(10000000000),
+    Genero string(50),
+    fk_Conteudo_ID_Conteudo number(1000000000) PRIMARY KEY,
+    fk_Criador_ID_Criador_Musica number(10000000)
+);
+
+CREATE TABLE Biblioteca_Ouve (
+    fk_ID_Conteudo number(1000000000),
+    fk_ID Usuario number(1000000000)
+);
+
+CREATE TABLE Podcast (
+    Genero string(50),
+    fk_ID_Conteudo number(1000000000) PRIMARY KEY
+);
+
+CREATE TABLE Criador (
+    Nome_Criador_Podcast string(50),
+    pk_ID_Criador_Podcast string(100) PRIMARY KEY
+);
+
+CREATE TABLE Ouve (
+    fk_Usuario_ID_Usuario number(1000000000),
+    fk_ID_Conteudo number(1000000000)
+);
+
+CREATE TABLE E_Criado_Por (
+    fk_Podcast_fk_Conteudo_ID_Conteudo number(1000000000),
+    fk_Criador_ID_Criador_Podcast string(100)
+);
+
+CREATE TABLE Cria (
+    fk_ID_Usuario number(1000000000),
+    fk_ID_Playlist number(10000000000)
+);
+ 
+ALTER TABLE Banda ADD CONSTRAINT FK_Banda_2
+    FOREIGN KEY (fk_criador_ID_criador_musica)
+    REFERENCES Criador (pk_ID_Criador_Musica)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE Artista ADD CONSTRAINT FK_Artista_2
+    FOREIGN KEY (fk_Criador_ID_Criador_Musica)
+    REFERENCES Criador (pk_ID_Criador_Musica)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE Playlist ADD CONSTRAINT FK_Playlist_1
+    FOREIGN KEY (fk_ID_Conteudo)
+    REFERENCES Conteudo (pk_ID_Conteudo)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE Musica ADD CONSTRAINT FK_Musica_2
+    FOREIGN KEY (fk_Conteudo_ID_Conteudo)
+    REFERENCES Conteudo (pk_ID_Conteudo)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE Musica ADD CONSTRAINT FK_Musica_3
+    FOREIGN KEY (fk_Criador_ID_Criador_Musica)
+    REFERENCES Criador (pk_ID_Criador_Musica)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Biblioteca_Ouve ADD CONSTRAINT FK_Biblioteca_Ouve_1
+    FOREIGN KEY (fk_ID_Conteudo)
+    REFERENCES Conteudo (pk_ID_Conteudo);
+ 
+ALTER TABLE Biblioteca_Ouve ADD CONSTRAINT FK_Biblioteca_Ouve_2
+    FOREIGN KEY (fk_ID Usuario)
+    REFERENCES Usuario (pk_ID_Usuario);
+ 
+ALTER TABLE Podcast ADD CONSTRAINT FK_Podcast_2
+    FOREIGN KEY (fk_ID_Conteudo)
+    REFERENCES Conteudo (pk_ID_Conteudo)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE Ouve ADD CONSTRAINT FK_Ouve_1
+    FOREIGN KEY (fk_Usuario_ID_Usuario)
+    REFERENCES Usuario (pk_ID_Usuario)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Ouve ADD CONSTRAINT FK_Ouve_2
+    FOREIGN KEY (fk_ID_Conteudo)
+    REFERENCES Conteudo (pk_ID_Conteudo)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE E_Criado_Por ADD CONSTRAINT FK_E_Criado_Por_1
+    FOREIGN KEY (fk_Podcast_fk_Conteudo_ID_Conteudo)
+    REFERENCES Podcast (fk_ID_Conteudo)
+    ON DELETE SET NULL;
+ 
+ALTER TABLE E_Criado_Por ADD CONSTRAINT FK_E_Criado_Por_2
+    FOREIGN KEY (fk_Criador_ID_Criador_Podcast)
+    REFERENCES Criador (pk_ID_Criador_Podcast)
+    ON DELETE SET NULL;
+ 
+ALTER TABLE Cria ADD CONSTRAINT FK_Cria_1
+    FOREIGN KEY (fk_ID_Usuario)
+    REFERENCES Usuario (pk_ID_Usuario);
+ 
+ALTER TABLE Cria ADD CONSTRAINT FK_Cria_2
+    FOREIGN KEY (fk_ID_Playlist)
+    REFERENCES Playlist (pk_ID_Playlist);
