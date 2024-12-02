@@ -1,0 +1,35 @@
+create table tabela(
+    coluna1 tipo primary key,
+    coluna2 tipo not NULL,
+    coluna3 tipo,
+    coluna4 tipo NULL
+    ...
+)
+chave estrangeira:
+    FOREIGN KEY (algumacoisa //(normalmente é o mesmo nome da coluna)// ) REFERENCES tabela(coluna1);
+
+Listar informaçoes de uma tabela:
+    SELECT * FROM tabela
+//(* siginifica tudo)
+
+listar os atributos unicos de uma tabela    
+    select distinct coluna from tabela
+
+listar colunas especificas de uma tabela
+    select coluna1,coluna2 from tabela
+
+listar colunas especificas de uma tabela que atendam a uma requisito
+    select coluna1,coluna2 from tabela where coluna3 = atributo
+
+listar de forma alfabetica decrescente
+    select coluna1,coluna2 
+    from tabela
+    where coluna3 = atributo 
+    ORDER BY coluna4 DESC;
+(ASC acendente | DESC descendente)
+
+listar linhas que cumpram um requisito calculado matematicamente
+    select coluna1,coluna2
+    from tabela
+    where coluna3 = atributo
+    and coluna4 > (algum numero)
