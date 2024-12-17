@@ -47,5 +47,28 @@ ja que ela disse que viu o assasino na academia os suspeitos se diminuem para do
 
 dai eu chutei e era o jeremy
 
-Congrats, you found the murderer! But wait, there's more... If you think you're up for a challenge, try querying the interview transcript of the murderer to find the real villain behind this crime. If you feel especially confident in your SQL skills, try to complete this final step with no more than 2 queries. Use this same INSERT statement with your new suspect to check your answer.
+Congrats, you found the murderer! But wait, theres more... If you think youre up for a challenge, try querying the interview transcript of the murderer to find the real villain behind this crime. If you feel especially confident in your SQL skills, try to complete this final step with no more than 2 queries. Use this same INSERT statement with your new suspect to check your answer.
 	
+agora eu fui ver a interview do jeremy
+
+select * from person
+	join interview
+		on person.id = interview.person_id
+	where name = 'Jeremy Bowers'
+
+
+Fui contratado por uma mulher com muito dinheiro. Não sei o nome dela, mas sei que ela tem cerca de 5'5" (65") ou 5'7" (67"). Ela é ruiva e dirige um Tesla Model S. Sei que ela participou do SQL Symphony Concert três vezes em dezembro de 2017.
+
+entao eu fui encontrar essa mulher:
+
+	select * from person 
+	join drivers_license
+		on person.license_id = drivers_license.id
+	where hair_color = 'red'
+    and car_model = 'Model S'
+	and height = 66
+	and age = 68
+
+dai eu chutei ela
+
+Parabéns, você encontrou o cérebro por trás do assassinato! Todos em SQL City o consideram o maior detetive de SQL de todos os tempos. Hora de abrir o champanhe!
