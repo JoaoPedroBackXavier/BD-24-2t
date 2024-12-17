@@ -9,8 +9,6 @@ Imagens de segurança mostram que havia duas testemunhas. A primeira testemunha 
 segunda testemunha:
 
 select * from person 
-	join drivers_license
-		on person.license_id = drivers_license.id
 	join get_fit_now_member
 		on person.id = get_fit_now_member.person_id
 	
@@ -22,8 +20,6 @@ person.id da anabel --> 16371
 achando a interview:
 
 select * from person 
-	join drivers_license
-		on person.license_id = drivers_license.id
 	join get_fit_now_member
 		on person.id = get_fit_now_member.person_id
 	join interview
@@ -66,9 +62,7 @@ entao eu fui encontrar essa mulher:
 		on person.license_id = drivers_license.id
 	where hair_color = 'red'
     and car_model = 'Model S'
-	and height = 66
-	and age = 68
 
-dai eu chutei ela
+dai eu chutei e era a Miranda Priestly
 
 Parabéns, você encontrou o cérebro por trás do assassinato! Todos em SQL City o consideram o maior detetive de SQL de todos os tempos. Hora de abrir o champanhe!
