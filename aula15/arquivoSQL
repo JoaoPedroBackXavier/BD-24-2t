@@ -1,0 +1,112 @@
+CREATE TABLE personagens (
+    id_personagem INT PRIMARY KEY,
+    nome VARCHAR(50)
+);
+
+CREATE TABLE cenarios (
+    id_cenario INT PRIMARY KEY,
+    nome_cenario VARCHAR(50)
+);
+
+CREATE TABLE itens (
+    id_item INT PRIMARY KEY,
+    nome_item VARCHAR(50),
+    valor INT
+);
+
+CREATE TABLE coletados (
+    id_personagem INT,
+    id_item INT,
+    id_cenario INT,
+    PRIMARY KEY (id_personagem, id_item, id_cenario),
+    FOREIGN KEY (id_personagem) REFERENCES personagens(id_personagem),
+    FOREIGN KEY (id_item) REFERENCES itens(id_item),
+    FOREIGN KEY (id_cenario) REFERENCES cenarios(id_cenario)
+);
+
+-- Inserindo dados nas tabelas
+INSERT INTO personagens (id_personagem, nome) VALUES
+(1, 'Aragorn'),
+(2, 'Legolas'),
+(3, 'Gimli'),
+(4, 'Gandalf'),
+(5, 'henry peter'),
+(6, 'Gondalfo');
+
+INSERT INTO cenarios (id_cenario, nome_cenario) VALUES
+(1, 'Floresta de Lothlórien'),
+(2, 'Montanhas de Moria'),
+(3, 'Campo de Batalha de Helm'),
+(4, 'pequena vila'),
+(5, 'terra do norte');
+
+
+INSERT INTO itens (id_item, nome_item, valor) VALUES
+(1, 'Espada Elfica', 500),
+(2, 'Arco Longo', 300),
+(3, 'Machado de Batalha', 400),
+(4, 'Varinha Mágica', 600),
+(5, 'algum item', 1000),
+(6, 'outro item', 600);
+
+delete from itens
+
+INSERT INTO coletados (id_personagem, id_item, id_cenario) VALUES
+(1, 1, 1),
+(2, 2, 2),
+	-- legolas ^^ c2
+(3, 3, 3),
+(4, 4, 1),
+(1, 3, 3),
+(2, 1, 1),
+	-- legolas ^^ c1
+(1, 1, 3),
+(3, 2, 2);
+
+delete from coletados
+
+select * from personagens
+select * from cenarios
+select * from itens
+select * from coletados
+
+
+select personagens.nome,itens.nome_item from coletados
+	join personagens
+	on coletados.id_personagem = personagens.id_personagem
+	join itens
+	on coletados.id_item = itens.id_item
+	where nome = 'Aragorn'
+
+select personagens.nome,cenarios.nome_cenario from coletados
+	join personagens
+	on coletados.id_personagem = personagens.id_personagem
+	join cenarios
+	on coletados.id_cenario = cenarios.id_cenario
+	where nome = 'Legolas'
+
+select personagens.nome,itens.nome_item,cenarios.nome_cenario from coletados
+	join personagens
+	on coletados.id_personagem = personagens.id_personagem
+	join cenarios
+	on coletados.id_cenario = cenarios.id_cenario
+	join itens
+	on coletados.id_item = itens.id_item
+	where nome = 'Gimli'
+	and nome_cenario = 'Campo de Batalha de Helm'
+
+select sum(itens.valor) from coletados
+	join cenarios
+	on coletados.id_cenario = cenarios.id_cenario
+	join itens
+	on coletados.id_item = itens.id_item
+
+
+-- select (select sum(id_cenario) from cenarios) as soma_dos_ids, * from coletados,cenarios
+-- -- seleciona a junção das tabelas de forma bruta ( multiplicação e sem filtros)
+
+-- where coletados.id_item = cenarios.id_cenario 
+-- -- organiza por id
+
+-- and cenarios.id_cenario = 3
+-- -- filtra para apenas cenario 3

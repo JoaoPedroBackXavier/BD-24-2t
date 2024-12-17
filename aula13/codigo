@@ -1,0 +1,21 @@
+CREATE TABLE Produtos(
+    ID_Produto INT PRIMARY KEY,
+    Nome_Produto VARCHAR(30) NOT NULL,
+    Descricao TEXT NULL,
+    Preco NUMERIC CHECK (Preco > 0) NOT NULL,
+    Qtde_Estoque SMALLINT DEFAULT 0
+);
+
+CREATE TABLE Pedidos (
+    ID_Pedido SERIAL PRIMARY KEY,
+    ID_Cliente INT NOT NULL REFERENCES clientes(ID_Cliente),
+    ID_Produto INT NOT NULL,
+    Qtde SMALLINT NOT NULL,
+    FOREIGN KEY (ID_Produto) REFERENCES produtos(ID_Produto)
+);
+
+CREATE TABLE clientes (
+ID_Cliente INT PRIMARY KEY,
+Nome_Cliente VARCHAR(20) NOT NULL,
+Sobrenome_Cliente VARCHAR(40) NOT NULL
+);

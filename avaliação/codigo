@@ -1,0 +1,51 @@
+procurei por cidade data e tipo usando os dados que eu tinha
+
+select * from crime_scene_report where city = "SQL City" and date=20180115 and type = 'murder'
+
+achei uma discrição:
+
+Imagens de segurança mostram que havia duas testemunhas. A primeira testemunha mora na última casa da "Northwestern Dr". A segunda testemunha, chamada Annabel, mora em algum lugar na "Avenida Franklin".	
+
+segunda testemunha:
+
+select * from person 
+	join drivers_license
+		on person.license_id = drivers_license.id
+	join get_fit_now_member
+		on person.id = get_fit_now_member.person_id
+	
+--where address_street_name = 'Northwestern Dr'
+where get_fit_now_member.name = 'Annabel Miller'
+
+person.id da anabel --> 16371
+
+achando a interview:
+
+select * from person 
+	join drivers_license
+		on person.license_id = drivers_license.id
+	join get_fit_now_member
+		on person.id = get_fit_now_member.person_id
+	join interview
+		on interview.person_id = person.id
+	
+--where address_street_name = 'Northwestern Dr'
+where get_fit_now_member.name = 'Annabel Miller'
+
+interview da anabel:
+
+Eu vi o assassinato acontecer e reconheci o assassino da minha academia quando estava malhando na semana passada, no dia 9 de janeiro.
+
+tabela com nomes e horarios de entrada e saida da academia:
+
+ select * from get_fit_now_check_in
+ 	join get_fit_now_member
+		on get_fit_now_member.id = get_fit_now_check_in.membership_id
+ 	where get_fit_now_check_in.check_in_date = 20180109
+
+ja que ela disse que viu o assasino na academia os suspeitos se diminuem para dois: joe e jeremy (estavam na academia ao mesmo tempo que a annabel no dia 9 de janeiro)
+
+dai eu chutei e era o jeremy
+
+Congrats, you found the murderer! But wait, there's more... If you think you're up for a challenge, try querying the interview transcript of the murderer to find the real villain behind this crime. If you feel especially confident in your SQL skills, try to complete this final step with no more than 2 queries. Use this same INSERT statement with your new suspect to check your answer.
+	
