@@ -73,7 +73,7 @@ INSERT INTO Personagem (pk_ID_personagem, personagem_nome, personagem_dataDeNasc
 SELECT Personagem.personagem_nome AS aluno, Casa.casa_nome AS casa  FROM Personagem
 JOIN Casa ON personagem.fk_Casa = Casa.pk_ID_Casa;
 
-SELECT Personagem.personagem_nome AS aluno, Casa.casa_nome AS casa FROM Personagem
+SELECT Personagem.personagem_nome AS aluno, Casa.casa_nome AS casa, Personagem.personagem_dataDeNascimento AS data_nascimento FROM Personagem
 JOIN Casa ON personagem.fk_Casa = Casa.pk_ID_Casa
 WHERE personagem.fk_Casa = 1;
 
